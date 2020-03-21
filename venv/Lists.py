@@ -15,6 +15,12 @@ for i in list:
        newList.append(i)
        check = i
     else:
-        check = i
-        continue
+       check = i
+       continue
 print(newList)
+
+list = [5, 1, 3, 6, 1]
+list.sort()
+print(list)
+
+
