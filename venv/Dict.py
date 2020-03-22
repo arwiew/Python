@@ -9,6 +9,7 @@ for key, value in dict.items():
             print(key)
 
 
+
 list = ['abc', 'bcd', 'abc', 'abd', 'abd', 'dcd', 'abc']
 list.sort()
 exlist = []
