@@ -1,3 +1,4 @@
+
 s = input()
 for i in s:
     while len(s) < 12:
