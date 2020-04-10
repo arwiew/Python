@@ -4,7 +4,7 @@ file = open('task_file.txt', 'r+')
 
 list_of_lines = []
 list_of_names = []
-list = []
+list_for_gen = []
 str = ''
 
 def email_gen(list):
@@ -23,10 +23,10 @@ for line in file:
         if el[1].isalpha() and el[2].isalpha() and len(el[3]) == 7 and el[4].islower():
             list_of_names.append(el[1])
             list_of_names.append(el[2])
-            list.append(list_of_names)
-            w = email_gen(list)
+            list_for_gen.append(list_of_names)
+            w = email_gen(list_for_gen)
             list_of_names = []
-            list = []
+            list_for_gen = []
             str = str + w[0] + line
         else: break
 
