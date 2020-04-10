@@ -1,3 +1,5 @@
+#создание email и запись в файл
+
 file = open('task_file.txt', 'r+')
 
 list_of_lines = []
