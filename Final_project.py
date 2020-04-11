@@ -1,13 +1,13 @@
 import random
-'''Вам нужно написать программу, которая будет читать файл из предыдущего упражнения, заниматься его чисткой, 
-формировать почтовые адреса для сотрудников, генерировать пароли безопасности для входа в почту, 
-заносить информацию в этот файл и перезаписывать его.'''
+import re
 
 list_of_lines = []
 list_of_names = []
 list_for_gen = []
-str = ''
+true_lines = ''
+wrong_lines = ''
 pass_len = 12
+check = ''
 
 def pas_gen(pass_len):
     password = ''
@@ -30,24 +30,27 @@ def email_gen(list):
         emails.append(i[1] + '.' + i[0][0:letter] + '@company.io')
     return emails
 
-file = open('task_file.txt', 'r')
+task_file = open('task_file.txt', 'r')
 
-for line in file:
+for line in task_file:
     list_of_lines = [line.split(', ')]
     for el in list_of_lines:
-        el[4] = el[4][:-1].lower()
-        if el[1].isalpha() and el[2].isalpha() and len(el[3]) == 7 and el[4].islower():
+        if re.findall(r'\D+', el[1]) and re.findall(r'\D+', el[2]) and len(el[3]) == 7 and re.findall(r'\D+', el[4]):
             list_of_names.append(el[1])
             list_of_names.append(el[2])
             list_for_gen.append(list_of_names)
             w = email_gen(list_for_gen)
             list_of_names = []
             list_for_gen = []
-            str = str + w[0] + line[:-1] + ', ' + pas_gen(12) + '\n'
-            print(str)
-        else: break
-file.close()
+            true_lines = true_lines + w[0] + line[:-1] + ', ' + pas_gen(pass_len) + '\n'
+        else:
+            wrong_lines = wrong_lines + line
+task_file.close()
 
-file = open('task_file.txt', 'w')
-file.write('EMAIL, NAME, LAST_NAME, TEL, CITY, PASSWORD\n' + str)
-file.close()
+wrong_file = open('wrong_file.txt', 'w')
+wrong_file.write(wrong_lines)
+wrong_file.close()
+
+task_file = open('task_file.txt', 'w')
+task_file.write('EMAIL, NAME, LAST_NAME, TEL, CITY, PASSWORD\n' + true_lines)
+task_file.close()
